@@ -1,14 +1,14 @@
 {
   "name": "json-dereference-cli",
-  "author": "David Kelley",
-  "description": "Provides a cli interface to the json-schema-ref-parser library",
+  "author": "David Kelley / Lena Schimmel",
+  "description": "Fork with some special features. Provides a cli interface to the json-schema-ref-parser library",
   "bin": {
     "json-dereference": "./dereference.js"
   },
   "bugs": {
-    "url": "https://github.com/davikelley/json-dereference-cli/issues"
+    "url": "https://github.com/lenaschimmel/json-dereference-cli/issues"
   },
-  "homepage": "https://github.com/davikelley/json-dereference-cli",
+  "homepage": "https://github.com/lenaschimmel/json-dereference-cli",
   "keywords": [
     "json",
     "schema",
@@ -26,11 +26,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/davidkelley/json-dereference-cli"
+    "url": "https://github.com/lenaschimmel/json-dereference-cli"
   },
   "dependencies": {
     "aws-sdk": "^2.80.0",
-    "json-schema-ref-parser": "^3.1.2",
+    "json-schema-ref-parser": "^9.0.9",
     "minimist": "^1.2.0",
     "node-yaml": "^3.1.0"
   }

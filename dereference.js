@@ -20,16 +20,35 @@ var schema = fs.readFileSync(input, { encoding: 'utf8' });
 
 console.log("Dereferencing schema: " + input);
 
-$RefParser.dereference(input, { resolve: { s3: s3Resolver } }, function(err, schema) {
+parser = new $RefParser();
+
+function replacer(key, value) {
+  // Filtering out properties
+  if (key == '$id') {
+    return undefined;
+  }
+  return value;
+}
+
+parser.dereference(input, { resolve: { s3: s3Resolver } }, function(err, schema) {
   if (err) {
     console.error(err);
   } else {
+    //console.log("Refs:");
+    //console.log(parser.$refs);
+
     var output = path.resolve(argv.o);
     var ext = path.parse(output).ext;
-
+    
     if (ext == '.json') {
-      var data = JSON.stringify(schema);
+      var data = JSON.stringify(schema, null, 4);
       fs.writeFileSync(output, data, { encoding: 'utf8', flag: 'w' });
+      if(argv.w) {
+        // Output once again, but wihtout $id attributes
+        var output_without_id = path.resolve(argv.w);
+        data = JSON.stringify(schema, replacer, 4);
+        fs.writeFileSync(output_without_id, data, { encoding: 'utf8', flag: 'w' });
+      }
     } else if (ext.match(/^\.?(yaml|yml)$/)) {
       var yaml = require('node-yaml');
       yaml.writeSync(output, schema, { encoding: 'utf8' })
