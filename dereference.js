@@ -33,6 +33,7 @@ function replacer(key, value) {
 parser.dereference(input, { resolve: { s3: s3Resolver } }, function(err, schema) {
   if (err) {
     console.error(err.message);
+    process.exit(1);
   } else {
     //console.log("Refs:");
     //console.log(parser.$refs);
