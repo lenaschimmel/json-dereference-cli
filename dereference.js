@@ -32,14 +32,14 @@ function replacer(key, value) {
 
 parser.dereference(input, { resolve: { s3: s3Resolver } }, function(err, schema) {
   if (err) {
-    console.error(err);
+    console.error(err.message);
   } else {
     //console.log("Refs:");
     //console.log(parser.$refs);
 
     var output = path.resolve(argv.o);
     var ext = path.parse(output).ext;
-    
+
     if (ext == '.json') {
       var data = JSON.stringify(schema, null, 4);
       fs.writeFileSync(output, data, { encoding: 'utf8', flag: 'w' });
